@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Signup</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" class="form-control" required value="{{ form.username.value|default:'' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" class="form-control" required value="{{ form.email.value|default:'' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password:</label>
+                        <input type="password" name="password1" class="form-control" required value="{{ form.password1.value|default:'' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirm Password:</label>
+                        <input type="password" name="password2" class="form-control" required value="{{ form.password2.value|default:'' }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Signup</button>
+                    
+                    {% if messages %}
+                        <div class="card bg-danger text-white mt-3">
+                            <div class="card-body">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
+                {% if error %}
+                <div class="alert alert-danger mt-3">{{ error }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

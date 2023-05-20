@@ -1,0 +1,10 @@
+<!-- verification_email.html -->
+
+Merhaba {{ user.username }},
+
+Hesabınızı etkinleştirmek için aşağıdaki linke tıklayın:
+
+<a href="http://{{ domain }}{% url 'verify_email' uidb64=uid token=token %}">E-posta Adresini Doğrula</a>
+
+Saygılarımızla,
+Ekibimiz

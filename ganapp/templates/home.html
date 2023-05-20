@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Art Generation{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <img src="#" alt="Logo" style="width: 100%;"> <!-- Replace # with your logo URL -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Generate Art</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Archive</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h1>Art Generation</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Image Loader -->
+                <div class="form-group">
+                    {{ form.image.label_tag }} <!-- This will render the label -->
+                    {{ form.image }} <!-- This will render the input field -->
+                </div>
+
+                <!-- Load Button -->
+                <button type="submit" class="btn btn-primary">Load</button>
+            </form>
+            <div class="container-fluid">
+                <h2>Your Images</h2>
+                {% if user_images %}
+                <img src="{{ user_images.image.url }}" alt="Your image">
+                {% else %}
+                <p>You have no images.</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
